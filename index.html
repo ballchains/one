@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>:P</title>
+<title>Accessing...</title>
 
 <style>
 
@@ -10,8 +10,13 @@ body{
 background:black;
 color:#00ff00;
 font-family:monospace;
-font-size:18px;
+font-size:clamp(14px,2.5vw,18px);
 padding:40px;
+margin:0;
+}
+
+#terminal{
+max-width:700px;
 }
 
 #cursor{
@@ -39,6 +44,25 @@ line-height:1.6;
 text-align:left;
 }
 
+/* MOBILE FIX */
+
+@media (max-width:700px){
+
+body{
+padding:20px;
+}
+
+#infoPanel{
+position:static;
+margin-bottom:30px;
+}
+
+#terminal{
+max-width:100%;
+}
+
+}
+
 </style>
 </head>
 
@@ -48,8 +72,8 @@ text-align:left;
 
 SYSTEM STATUS
 -------------
-Device: <span id="device"></span>
-Browser: <span id="browser"></span>
+Device: <span id="device"></span><br>
+Browser: <span id="browser"></span><br>
 Time: <span id="time"></span>
 
 </div>
@@ -62,14 +86,14 @@ const lines = [
 
 "Initializing request...",
 "",
-"Access requested.",
+"QR code detected.",
 "Resolving link...",
 "",
 "Connection established.",
-"Human verification success.",
+"Secure channel verified.",
 "",
 "Client device recognized.",
-"Fetching info...",
+"Browser session opened.",
 "",
 "Cookies logged.",
 "Session token generated.",
@@ -77,8 +101,8 @@ const lines = [
 "Visitor record created.",
 "Timestamp stored.",
 "",
-"Don't worry, i'll keep this safe.",
-"...probably."
+"Status: OK",
+"Awaiting further input..."
 
 ];
 
@@ -88,24 +112,34 @@ const speed = 35;
 const terminal = document.getElementById("terminal");
 
 function type(){
+
 if(line < lines.length){
+
 if(char < lines[line].length){
+
 terminal.innerHTML += lines[line].charAt(char);
 char++;
 setTimeout(type, speed);
-}
-else{
+
+}else{
+
 terminal.innerHTML += "<br>";
 line++;
 char = 0;
 setTimeout(type, 300);
+
 }
+
 }
+
 }
 
 type();
 
-document.getElementById("device").innerText = navigator.platform;
+/* system info panel */
+
+document.getElementById("device").innerText =
+navigator.platform;
 
 document.getElementById("browser").innerText =
 navigator.userAgent.split(" ").slice(-1)[0];
