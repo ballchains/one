@@ -1,17 +1,78 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>You found me</title>
-</head>
-<body style="margin:0;background:black;color:white;font-family:Arial,sans-serif;display:flex;justify-content:center;align-items:center;height:100vh;text-align:center;">
+<meta charset="UTF-8">
+<title>Accessing...</title>
 
-  <div>
-    <h1>this is empty.</h1>
-    <p>for now.</p>
-    <p>....</p>
-  </div>
+<style>
+body{
+background:black;
+color:#00ff00;
+font-family:monospace;
+font-size:18px;
+padding:40px;
+}
+
+#cursor{
+display:inline-block;
+width:10px;
+background:#00ff00;
+margin-left:5px;
+animation:blink 1s infinite;
+}
+
+@keyframes blink{
+0%{opacity:1;}
+50%{opacity:0;}
+100%{opacity:1;}
+}
+</style>
+</head>
+
+<body>
+
+<div id="terminal"></div><span id="cursor"></span>
+
+<script>
+
+const lines = [
+"Scanning QR code...",
+"Connection established.",
+"Welcome.",
+"Status:OK",
+"",
+"thanks for scanning my QR code.",
+"",
+"i promise to keep your information a secret.",
+"probably.",
+"",
+"More coming soon..."
+];
+
+let line = 0;
+let char = 0;
+const speed = 35;
+const terminal = document.getElementById("terminal");
+
+function type(){
+if(line < lines.length){
+if(char < lines[line].length){
+terminal.innerHTML += lines[line].charAt(char);
+char++;
+setTimeout(type, speed);
+}
+else{
+terminal.innerHTML += "<br>";
+line++;
+char = 0;
+setTimeout(type, 300);
+}
+}
+}
+
+type();
+
+</script>
 
 </body>
 </html>
