@@ -2,9 +2,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>subspace</title>
+<title>:P</title>
 
 <style>
+
 body{
 background:black;
 color:#00ff00;
@@ -26,6 +27,7 @@ animation:blink 1s infinite;
 50%{opacity:0;}
 100%{opacity:1;}
 }
+
 #infoPanel{
 position:fixed;
 right:40px;
@@ -36,26 +38,38 @@ font-size:16px;
 line-height:1.6;
 text-align:left;
 }
+
 </style>
 </head>
 
 <body>
+
+<div id="infoPanel">
+
+SYSTEM STATUS
+-------------
+Device: <span id="device"></span>
+Browser: <span id="browser"></span>
+Time: <span id="time"></span>
+
+</div>
 
 <div id="terminal"></div><span id="cursor"></span>
 
 <script>
 
 const lines = [
+
 "Initializing request...",
 "",
-"QR code detected.",
+"Access requested.",
 "Resolving link...",
 "",
 "Connection established.",
-"Secure channel verified.",
+"Human verification success.",
 "",
 "Client device recognized.",
-"Browser session opened.",
+"Fetching info...",
 "",
 "Cookies logged.",
 "Session token generated.",
@@ -63,8 +77,9 @@ const lines = [
 "Visitor record created.",
 "Timestamp stored.",
 "",
-"Status: OK",
-"Awaiting further input..."
+"Don't worry, i'll keep this safe.",
+"...probably."
+
 ];
 
 let line = 0;
@@ -89,6 +104,14 @@ setTimeout(type, 300);
 }
 
 type();
+
+document.getElementById("device").innerText = navigator.platform;
+
+document.getElementById("browser").innerText =
+navigator.userAgent.split(" ").slice(-1)[0];
+
+document.getElementById("time").innerText =
+new Date().toLocaleTimeString();
 
 </script>
 
